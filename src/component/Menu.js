@@ -1,10 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+
+import Home from './Home'
+import Req from './Req'
 import Sample1 from '../Sample1'
 import Game from '../tutorial'
 import './css/style2.css';
 
 class Menu extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            message: "Home"
+        }
+        this.onChangeTitle = this.onChangeTitle.bind(this);
+    }
+
+    onChangeTitle(str) {
+        this.setState({ message: str });
+    }
 
     render() {
         return (
@@ -13,11 +27,12 @@ class Menu extends React.Component {
                     <h1>Applied Information Technology Engineer</h1>
                 </header>
                 <nav>
-                    <RouterMenu />
+                    <RouterMenu onChangeTitle={this.onChangeTitle} />
                 </nav>
                 <main>
                     <div class="imgbox"><img src="https://source.unsplash.com/random" alt=""></img></div>
                     <article>
+                        <h3>{this.state.message}</h3>
                         <RouteList />
                     </article>
                 </main>
@@ -28,17 +43,52 @@ class Menu extends React.Component {
     }
 }
 
-const message = 'Home画面';
+class RouterMenu extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { onChangeTitle: this.props.onChangeTitle, };
+    };
+
+    render() {
+        return (
+            //contents変数はこのソースファイルの下部で定義してある
+            <ul>
+                {contents.map(content =>
+                    <li>
+                        <Link to={content.path} onClick={(event) => { this.state.onChangeTitle(content.label) }}>{content.label}</Link>
+                    </li>
+                )}
+            </ul>
+        );
+    }
+}
+
+function RouteList(props) {
+
+    return (
+        //contents変数はこのソースファイルの下部で定義してある
+        <Routes>
+            {contents.map(content =>
+                <Route path={content.path} element={content.element} />
+            )}
+        </Routes>
+    );
+}
+
 const contents = [
-    { "path": '/', "label": 'Home', "element": message },
+    { "path": '/', "label": 'Home', "element": <Home /> },
+    { "path": 'req', "label": 'リクエスト検証', "element": <Req /> },
+    { "path": 'sandbox', "label": '検証用ページ', "element": <Game /> },
+    { "path": 'board', "label": '掲示板アプリ', "element": null },
     { "path": 'sample1', "label": 'sample1', "element": <Sample1 /> },
     { "path": 'tutorial', "label": 'tutorial', "element": <Game /> },
+    { "path": 'firebase', "label": 'FireBaseでDB接続', "element": null },
     { "path": 'html-css', "label": 'htmlとcssの整理', "element": null },
     { "path": 'shortcut', "label": 'ショートカットの使い方', "element": null },
     { "path": 'chromedev', "label": 'Chromeのデベロッパツール', "element": null },
     { "path": 'jsreg', "label": 'javascript 正規表現', "element": null },
     { "path": 'scraping', "label": 'スクレイピング（企業情報）', "element": null },
-    { "path": 'techwords', "label": '専門用語の理解・解説', "element": null },
     { "path": 'testtool', "label": 'テストツールの導入', "element": null },
     { "path": 'servicenow', "label": 'ServiceNowの解説', "element": null },
     { "path": 'certupdate', "label": '証明書の自動更新', "element": null },
@@ -48,6 +98,7 @@ const contents = [
     { "path": 'excel', "label": 'Excelの便利機能', "element": null },
     { "path": 'vba', "label": 'VBAの便利機能', "element": null },
     { "path": 'nodejs', "label": 'node.jsの導入', "element": null },
+    { "path": 'techwords', "label": '専門用語の理解・解説', "element": null },
     { "path": 'crosssite', "label": 'クロスサイトスクリプティングについて', "element": null },
     { "path": 'vscode', "label": 'VisualStudioCodeのショートカット・便利機能', "element": null },
     { "path": 'design', "label": 'ページのデザイン', "element": null },
@@ -59,35 +110,5 @@ const contents = [
     { "path": 'trend', "label": 'Googleトレンド', "element": null },
 
 ];
-
-function RouterMenu(props) {
-    return (
-        <ul>
-            <LinkList />
-        </ul>
-    );
-}
-
-function LinkList(props) {
-
-    return (
-        contents.map(content =>
-            <li>
-                <Link to={content.path}>{content.label}</Link>
-            </li>
-        )
-    );
-}
-
-function RouteList(props) {
-
-    return (
-        <Routes>
-            {contents.map(content =>
-                <Route path={content.path} element={content.element} />
-            )}
-        </Routes>
-    );
-}
 
 export default Menu;
