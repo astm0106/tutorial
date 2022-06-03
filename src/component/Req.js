@@ -1,43 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import db from "./firebase";
+import { doc, collection, getDocs, onSnapshot} from "firebase/firestore";
 
-// 修正1: コンストラクタを作りたいので、関数コンポーネントからクラスに修正
-class Req extends React.Component {
-//function App() {
 
-  // 修正2: コンストラクタを追加
-  constructor(props){
-    super(props);
-    this.state = {};
-    // バックエンドのAPIを呼び出し、this.state.nameに結果を保管.
-    // 呼び出し先はローカルとサーバ上で可変にしたいので環境変数からとる
-    //process.env.REACT_APP_BACKEND_URL
-    //http://localhost:5001
-    fetch("http://localhost:5001" + "/api/user")
-      .then(response => response.json())
-      .then(json =>  this.setState({name : json.name}));
-  }
+function Req(){
+  const [posts, setPosts] = useState([]);
 
-// 修正3: renderメソッドにする
-  render(){
-    return (
-      <div className="App">
-        <header className="App-header">
-           {/* 修正4: API呼び出し結果を反映 */}
-          <p>
-            Hi, {this.state.name}. Edit <code>src/Req.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-          Learn React
-          </a>
-        </header>
+  useEffect(() => {
+    const postData = collection(db, "posts");
+    getDocs(postData).then((snapshot) =>{
+     //console.log(snapshot.docs.map((doc) => ({ ...doc.data()})));
+     setPosts(snapshot.docs.map((doc) => ({ ...doc.data()})));
+    });
+    
+    
+    onSnapshot(postData, (post) => {
+      setPosts(post.docs.map((doc) => ({ ...doc.data()})));
+    });
+
+  }, []);
+
+  return (<div>
+    {posts.map((post) => (
+      <div key={post.title}>
+        <hi>{post.title}</hi>
+        <p>{post.text}</p>
       </div>
-    );
-  }
+    ))
+
+
+    }
+
+  </div>)
+
 }
+
+
+
+  
+
 
 export default Req
