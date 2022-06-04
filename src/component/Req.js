@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import db from "./firebase";
+import db from "./firebase_old";
 import { doc, collection, getDocs, onSnapshot} from "firebase/firestore";
 
 
@@ -22,8 +22,8 @@ function Req(){
 
   return (<div>
     {posts.map((post) => (
-      <div key={post.title}>
-        <hi>{post.title}</hi>
+      <div key={post.name}>
+        <hi>{post.name}</hi>
         <p>{post.text}</p>
       </div>
     ))

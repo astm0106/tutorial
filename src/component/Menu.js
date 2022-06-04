@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 
-import Home from './Home'
-import Req from './Req'
-import Sample1 from '../Sample1'
-import Game from '../tutorial'
-import './css/style2.css';
+import Home from './Home';
+import Req from './Req';
+import SignOut from './SignOut';
+import Sample1 from '../Sample1';
+import Game from '../tutorial';
+import './css/style2.css'; 
 
 class Menu extends React.Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class Menu extends React.Component {
             <Router>
                 <header>
                     <h1>Applied Information Technology Engineer</h1>
+                    <SignOut />
                 </header>
                 <nav>
                     <RouterMenu onChangeTitle={this.onChangeTitle} />
@@ -78,12 +80,12 @@ function RouteList(props) {
 
 const contents = [
     { "path": '/', "label": 'Home', "element": <Home /> },
-    { "path": 'req', "label": 'リクエスト検証', "element": <Req /> },
-    { "path": 'sandbox', "label": '検証用ページ', "element": <Game /> },
-    { "path": 'board', "label": '掲示板アプリ', "element": null },
-    { "path": 'sample1', "label": 'sample1', "element": <Sample1 /> },
+    { "path": 'req', "label": 'FireBaseでリクエスト検証', "element": <Req /> },
     { "path": 'tutorial', "label": 'tutorial', "element": <Game /> },
-    { "path": 'firebase', "label": 'FireBaseでDB接続', "element": null },
+    /*
+    { "path": 'board', "label": 'FireBaseで掲示板アプリ', "element": <SignIn/> },
+    { "path": 'sandbox', "label": '検証用ページ', "element": null },
+    { "path": 'sample1', "label": 'sample1', "element": <Sample1 /> },
     { "path": 'html-css', "label": 'htmlとcssの整理', "element": null },
     { "path": 'shortcut', "label": 'ショートカットの使い方', "element": null },
     { "path": 'chromedev', "label": 'Chromeのデベロッパツール', "element": null },
@@ -108,7 +110,7 @@ const contents = [
     { "path": 'humburger', "label": 'ハンバーガーメニューの作り方', "element": null },
     { "path": 'bootstrop', "label": 'cssでブートストラップを試したい', "element": null },
     { "path": 'trend', "label": 'Googleトレンド', "element": null },
-
+*/
 ];
 
 export default Menu;
