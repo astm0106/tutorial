@@ -4,9 +4,10 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import Home from './Home';
 import Req from './Req';
 import SignOut from './SignOut';
-import Sample1 from '../Sample1';
+import Board from './Board';
 import Game from '../tutorial';
-import './css/style2.css'; 
+import './css/style2.css';
+import './css/styleBoard.css';
 
 class Menu extends React.Component {
     constructor(props) {
@@ -25,8 +26,8 @@ class Menu extends React.Component {
         return (
             <Router>
                 <header>
-                    <h1>Applied Information Technology Engineer</h1>
                     <SignOut />
+                    <h1>Applied Information Technology Engineer</h1>
                 </header>
                 <nav>
                     <RouterMenu onChangeTitle={this.onChangeTitle} />
@@ -80,10 +81,10 @@ function RouteList(props) {
 
 const contents = [
     { "path": '/', "label": 'Home', "element": <Home /> },
+    { "path": 'board', "label": 'FireBaseで掲示板アプリ', "element": <Board /> },
     { "path": 'req', "label": 'FireBaseでリクエスト検証', "element": <Req /> },
     { "path": 'tutorial', "label": 'tutorial', "element": <Game /> },
     /*
-    { "path": 'board', "label": 'FireBaseで掲示板アプリ', "element": <SignIn/> },
     { "path": 'sandbox', "label": '検証用ページ', "element": null },
     { "path": 'sample1', "label": 'sample1', "element": <Sample1 /> },
     { "path": 'html-css', "label": 'htmlとcssの整理', "element": null },

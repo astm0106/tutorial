@@ -1,0 +1,19 @@
+.imgIcon{
+    border-radius: 50%;
+    height: 45px;
+    margin-top: -20px;
+    border: 2px solid black;
+    width:auto;
+}
+
+.msgBox{
+    display: flex;
+    padding: 20px 10px 0 20px;
+    margin: 20px;
+    /* border-radius: 3000px; */
+    box-shadow: 0 0 10px rgb(164, 164, 164);
+    align-items: center;
+}
+.small{
+    font-size: small;
+}

@@ -4,7 +4,7 @@ import { auth } from './firebase'
 
 function SignOut() {
   return (
-    <div>
+    <div className='right'>
       <Button onClick = {()=> auth.signOut()}>サインアウト</Button>
     </div>
   )
