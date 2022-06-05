@@ -10,7 +10,7 @@ function Board() {
 
     useEffect(() => {
         db.collection("message")
-            .orderBy("createdAt")
+            .orderBy("createdAt","desc")
             .limit(50)
             .onSnapshot((snapshot) => {
                 setMessages(snapshot.docs.map((doc) => (doc.data({ serverTimestamps: "estimate" }))));
@@ -20,6 +20,7 @@ function Board() {
 
     return (
         <div>
+            <SendMessage/>
             <div className='msgs'>
                 {messages.map(({ id, text, photoURL, uid, createdAt}) => (
                     <div class='msgBox'>
@@ -32,7 +33,6 @@ function Board() {
                 )
                 )}
             </div>
-            <SendMessage/>
         </div>
     )
 }
